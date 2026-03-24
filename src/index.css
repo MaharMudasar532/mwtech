@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html, body, #root { height: 100%; }
+	body {
+		@apply bg-mw-background font-sans text-gray-800 antialiased;
+	}
+	a { @apply text-mw-primary; }
+}
+
+/* Utility: subtle card */
+.card {
+	@apply bg-white rounded-lg shadow-card p-6;
+}

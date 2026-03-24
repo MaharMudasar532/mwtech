@@ -1,13 +1,10 @@
 import React from 'react'
-import heroImg from '../assets/hero.png'
-
-const projects = [
-  { title: 'Commercial Building Refurbishment', img: heroImg, desc: 'Full electromechanical upgrade for office tower.' },
-  { title: 'Residential HVAC Installation', img: heroImg, desc: 'Design and install HVAC systems for apartment complex.' },
-  { title: 'Retail Fit-out', img: heroImg, desc: 'Electrical, lighting and interiors fit-out for retail.' },
-]
+import { useSiteContext } from '../context/SiteContext'
 
 export default function Portfolio() {
+  const { settings } = useSiteContext();
+  const projects = settings.portfolio_projects || [];
+
   return (
     <section id="portfolio" className="max-w-7xl mx-auto px-6 py-16">
       <div className="text-center">
@@ -17,13 +14,17 @@ export default function Portfolio() {
 
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((p) => (
-          <div key={p.title} className="card">
+          <div key={p.id || p.title} className="card">
             <img src={p.img} alt={p.title} className="w-full h-44 object-cover rounded-md" />
             <h3 className="mt-4 font-semibold text-gray-900">{p.title}</h3>
             <p className="text-sm text-gray-600 mt-1">{p.desc}</p>
           </div>
         ))}
       </div>
+      
+      {projects.length === 0 && (
+          <p className="text-center text-gray-400 mt-8">Recent projects showcase coming soon...</p>
+      )}
     </section>
   )
 }
